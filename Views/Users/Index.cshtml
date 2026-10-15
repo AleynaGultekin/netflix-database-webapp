@@ -1,0 +1,36 @@
+@model IEnumerable<NetflixMvcApp.Models.User>
+
+@{
+    ViewData["Title"] = "Kullanıcılar";
+}
+
+<div class="container mt-5 text-white">
+    <h2 class="mb-4">👥 Kullanıcı Listesi</h2>
+    <table class="table table-dark table-striped table-hover border-secondary">
+        <thead>
+            <tr class="text-danger">
+                <th>ID</th>
+                <th>Email</th>
+                <th>Şifre</th>
+                <th>Abonelik</th>
+                <th>Oluşturulma Tarihi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserId</td>
+                    <td>@item.Email</td>
+                    <td>@item.Password</td>
+                    <td>
+                        @if(item.SubscriptionType == "Premium") { <span class="badge bg-warning text-dark">Premium</span> }
+                        else if(item.SubscriptionType == "Standard") { <span class="badge bg-primary">Standard</span> }
+                        else { <span class="badge bg-secondary">Basic</span> }
+                    </td>
+                    <td>@item.CreatedAt.ToString("dd.MM.yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

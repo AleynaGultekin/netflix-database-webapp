@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    // Layout'u null yapmıyoruz ki navbar görünsün, ama navbar'ın arkasına resim koyacağız.
+}
+<style>
+    body { padding-top: 0 !important; } /* Resmi en tepeye yasla */
+    .navbar { background-color: transparent !important; background-image: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); border-bottom: none; } /* Menüyü şeffaf yap */
+</style>
+
+<div style="
+    background-image: linear-gradient(to top, rgba(0,0,0,0.8) 0, rgba(0,0,0,0) 60%, rgba(0,0,0,0.8) 100%), 
+                      url('https://assets.nflxext.com/ffe/siteui/vlv3/f841d4c7-10e1-40af-bcae-07a3f8dc141a/f6d7434e-d6de-4185-a6d4-c77a2d08737b/TR-tr-20220502-popsignuptwoweeks-perspective_alpha_website_medium.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;">
+</div>
+
+<div class="d-flex flex-column justify-content-center align-items-center text-center text-white" style="height: 100vh; padding-top: 60px;">
+    
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        <h1 class="display-3 fw-bold mb-3">Tekrar Hoşgeldiniz!</h1>
+        <h3 class="fw-normal mb-4">İzlemeye kaldığınız yerden devam edin.</h3>
+        
+        <div class="d-flex gap-3">
+            <a asp-controller="Content" asp-action="Index" class="btn btn-light btn-lg fw-bold px-5 py-3" style="font-size: 1.5rem;">
+                ▶ Oynat
+            </a>
+            <a asp-controller="Profiles" asp-action="Index" class="btn btn-secondary btn-lg fw-bold px-5 py-3 bg-opacity-75" style="font-size: 1.5rem;">
+                Profiller
+            </a>
+        </div>
+    }
+    else
+    {
+        <h1 class="display-3 fw-bold mb-3" style="max-width: 800px;">Sınırsız film, dizi ve çok daha fazlası.</h1>
+        <h3 class="fw-normal mb-4">İstediğiniz yerde izleyin. İstediğiniz zaman iptal edin.</h3>
+        <p class="fs-5">İzlemeye hazır mısınız? Üye olmak ya da hesabınıza erişmek için tıklayın.</p>
+        
+        <a asp-controller="Account" asp-action="Login" class="btn btn-danger btn-lg fw-bold px-5 py-3" style="font-size: 1.5rem;">
+            Başlayın >
+        </a>
+    }
+
+</div>

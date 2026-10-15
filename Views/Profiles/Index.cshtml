@@ -1,0 +1,37 @@
+@model IEnumerable<NetflixMvcApp.Models.Profile>
+
+@{
+    ViewData["Title"] = "Profiller";
+}
+
+<div class="container mt-5 text-white">
+    <h2 class="mb-4">🙂 Profil Listesi</h2>
+    <table class="table table-dark table-striped table-hover border-secondary">
+        <thead>
+            <tr class="text-danger">
+                <th>Profil Adı</th>
+                <th>Bağlı Hesap (Email)</th>
+                <th>Tür</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="fw-bold text-white" style="font-size: 1.1rem;">@item.ProfileName</td>
+                    <td class="text-muted">@(item.User?.Email ?? "Bilinmiyor")</td>
+                    <td>
+                        @if (item.IsKid)
+                        {
+                            <span class="badge bg-success">Çocuk Profili 🧸</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Yetişkin</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,48 @@
+@model IEnumerable<NetflixMvcApp.Models.WatchHistory>
+
+@{
+    ViewData["Title"] = "İzleme Geçmişi";
+}
+
+<div class="container mt-5 text-white">
+    <h2 class="mb-4">📜 İzleme Geçmişi</h2>
+    
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning text-dark">
+            Henüz izleme geçmişi verisi yok. Lütfen verileri yükleyiniz.
+        </div>
+    }
+    else
+    {
+        <table class="table table-dark table-striped table-hover">
+            <thead>
+                <tr class="text-danger">
+                    <th>Profil</th>
+                    <th>İzlenen İçerik</th>
+                    <th>Tarih</th>
+                    <th>Tamamlanma %</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="fw-bold">@item.Profile?.ProfileName</td>
+                        <td>@item.Content?.Title</td>
+                        <td>@item.WatchedDate.ToString("dd.MM.yyyy")</td>
+                        <td>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-danger" role="progressbar" 
+                                     style="width: @item.CompletionPercentage%;" 
+                                     aria-valuenow="@item.CompletionPercentage" aria-valuemin="0" aria-valuemax="100">
+                                    @item.CompletionPercentage%
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

@@ -1,0 +1,55 @@
+@model NetflixMvcApp.Models.Content
+
+@{
+    ViewData["Title"] = "Yeni İçerik Ekle";
+}
+
+<div class="container mt-5 text-white">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="mb-4">🎬 Yeni Film/Dizi Ekle</h2>
+            
+            <form asp-action="Create" class="bg-dark p-4 rounded border border-secondary">
+                
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label">Başlık</label>
+                    <input asp-for="Title" class="form-control" placeholder="Örn: Inception" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ContentType" class="form-label">Tür</label>
+                    <select asp-for="ContentType" class="form-select">
+                        <option value="Movie">Film</option>
+                        <option value="Series">Dizi</option>
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="ReleaseYear" class="form-label">Yıl</label>
+                        <input asp-for="ReleaseYear" class="form-control" type="number" placeholder="2024" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Rating" class="form-label">IMDB Puanı</label>
+                        <input asp-for="Rating" class="form-control" type="text" placeholder="8.5" />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DurationMinutes" class="form-label">Süre (Dk)</label>
+                    <input asp-for="DurationMinutes" class="form-control" type="number" />
+                </div>
+                 
+                 <div class="mb-3">
+                    <label asp-for="ImageUrl" class="form-label">Kapak Resmi URL</label>
+                    <input asp-for="ImageUrl" class="form-control" placeholder="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_wmHLL-oAyUnVNGbKu7WcFErqcb6NNQ8X2w&s" />
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-danger btn-lg">Kaydet</button>
+                    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

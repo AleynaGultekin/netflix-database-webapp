@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NetflixMvcApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/NetflixMvcApp.styles.css" asp-append-version="true" />
+    
+    <style>
+        /* GENEL AYARLAR */
+        body { 
+            background-color: #141414; 
+            color: white; 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            padding-top: 80px; /* ÖNEMLİ: Menü altında kalmaması için boşluk */
+        }
+        
+        /* MENÜ (NAVBAR) AYARLARI */
+        .navbar { 
+            background-color: #000000 !important; /* Arka planı simsiyah yaptık */
+            border-bottom: 1px solid #333; /* Hafif bir çizgi */
+            height: 70px;
+        }
+        
+        .nav-link { 
+            color: #e5e5e5 !important; 
+            font-size: 0.95rem; 
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover { 
+            color: #b3b3b3 !important; 
+        }
+
+        .footer { 
+            color: #808080; 
+            padding: 20px 0; 
+            margin-top: 50px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+            <div class="container-fluid px-4">
+                
+                <a class="navbar-brand fw-bold text-danger me-4" asp-controller="Home" asp-action="Index" style="font-size: 1.8rem; letter-spacing: 1px;">NETFLIX</a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Content" asp-action="Index">İçerikler</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Profiles" asp-action="Index">Profiller</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Users" asp-action="Index">Admin</a></li>
+                        }
+                    </ul>
+
+                    <div class="d-flex align-items-center">
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        {
+                            <span class="text-secondary small me-3 d-none d-sm-block">
+                                @User.Identity.Name
+                            </span>
+                            <a class="btn btn-sm btn-outline-light" asp-controller="Account" asp-action="Logout">Çıkış Yap</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-danger btn-sm fw-bold px-3" asp-controller="Account" asp-action="Login">Oturum Aç</a>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer border-top border-secondary text-center">
+        <div class="container">
+            &copy; 2025 - NetflixMvcApp - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-secondary text-decoration-none">Gizlilik</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

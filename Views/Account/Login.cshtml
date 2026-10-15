@@ -1,0 +1,87 @@
+@{
+    Layout = null; // Bu sayfada menü görünmesin diye Layout'u kapattık
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>Giriş Yap - NetflixMvcApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://assets.nflxext.com/ffe/siteui/vlv3/f841d4c7-10e1-40af-bcae-07a3f8dc141a/f6d7434e-d6de-4185-a6d4-c77a2d08737b/TR-tr-20220502-popsignuptwoweeks-perspective_alpha_website_medium.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        .login-card {
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 60px;
+            width: 450px;
+            border-radius: 4px;
+            color: white;
+        }
+        .btn-netflix {
+            background-color: #e50914;
+            color: white;
+            font-weight: bold;
+            border: none;
+            height: 50px;
+        }
+        .btn-netflix:hover { background-color: #f40612; }
+        .form-control {
+            background: #333;
+            border: none;
+            color: white;
+            height: 50px;
+        }
+        .form-control:focus {
+            background: #454545;
+            color: white;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h2 class="mb-4 fw-bold">Oturum Aç</h2>
+        
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-warning text-dark p-2 mb-3">
+                @ViewBag.Error
+            </div>
+        }
+
+        <form asp-controller="Account" asp-action="Login" method="post">
+            <div class="mb-3">
+                <input type="text" name="email" class="form-control" placeholder="E-posta veya telefon numarası" required />
+            </div>
+            <div class="mb-4">
+                <input type="password" name="password" class="form-control" placeholder="Parola" required />
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-netflix btn-lg fs-6">Oturum Aç</button>
+            </div>
+        </form>
+
+        <div class="mt-4 text-secondary d-flex justify-content-between small">
+            <div>
+                <input type="checkbox" id="rememberMe" checked> <label for="rememberMe">Beni hatırla</label>
+            </div>
+            <a href="#" class="text-secondary text-decoration-none">Yardım ister misiniz?</a>
+        </div>
+
+        <div class="mt-5 text-secondary">
+            Netflix'e katılmak ister misiniz? <a href="#" class="text-white text-decoration-none fw-bold">Şimdi kaydolun.</a>
+        </div>
+    </div>
+
+</body>
+</html>

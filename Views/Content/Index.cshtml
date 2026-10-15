@@ -1,0 +1,34 @@
+@model IEnumerable<NetflixMvcApp.Models.Content>
+
+@{
+    ViewData["Title"] = "İçerikler";
+}
+
+<div class="container mt-5 text-white">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>🎬 Filmler ve Diziler</h2>
+        <a asp-action="Create" class="btn btn-danger">+ Yeni İçerik</a>
+    </div>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 mb-4">
+                <div class="card bg-dark border-secondary h-100 text-white">
+                    <img src="@item.ImageUrl" class="card-img-top" alt="@item.Title" style="height: 300px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger fw-bold">@item.Title</h5>
+                        <p class="card-text">
+                            <span class="badge bg-light text-dark">@item.ReleaseYear</span>
+                            <span class="badge bg-warning text-dark">IMDB: @item.Rating</span>
+                        </p>
+                        <p class="card-text small text-muted">
+                            @if(item.ContentType == "Movie") { <span>🎥 Film • @item.DurationMinutes dk</span> }
+                            else { <span>📺 Dizi • @item.DurationMinutes dk/bölüm</span> }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
